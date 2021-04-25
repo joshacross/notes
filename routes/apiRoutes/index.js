@@ -3,8 +3,7 @@ const router = require('express').Router();
 const { 
     filterByQuery,
     findById,
-    createNewNote,
-    validateNotes
+    createNewNote
 } = require('../../lib/notes');
 
 const { notes } = require('../../db/db');
@@ -30,13 +29,18 @@ router.post('/notes', (req, res) => {
     // set id based on what the next index of the array will be
     req.body.id = notes.length.toString();
 
-    // if any data in req.body is incorrect, send 400 error back
-    if (!validateNotes(req.body)) {
-        res.status(400).send('The note cannot be empty.');
-    } else {
-        const note = createNewNote(req.body, notes);
-        res.json(notes);
-    }
+    const note = createNewNote(req.body, notes);
+    res.json(notes);
+
 });
+
+// router.delete('/notes/:id', (req, res) => {
+//     const noteIndex = findById(req.params.id, notes);
+
+//     if (noteIndex === -1) return res.status(404).json({})
+
+//     notes.splice(noteIndex, 1)
+//     res.json(notes)
+// });
 
 module.exports = router;

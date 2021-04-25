@@ -37,23 +37,3 @@ test("finds by id", () => {
 
     expect(result.title).toBe("Joshua");
 });
-
-test("validates notes", () => {
-    const note = {
-        id: "3",
-        title: "Joshua",
-        text: "Hello this is a note",
-    };
-
-    const invalidNote = {
-        id: "4",
-        title: 1234,
-        text: "1234"
-    };
-
-    const result = validateNotes(note);
-    const result2 = validateNotes(invalidNote);
-
-    expect(result).toBeDefined(true);
-    expect(result2).toBeNull(true);
-});
