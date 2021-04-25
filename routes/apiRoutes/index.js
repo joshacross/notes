@@ -1,7 +1,7 @@
 const router = require('express').Router();
 
 const { 
-    // filterByQuery,
+    filterByQuery,
     findById,
     createNewNote,
     validateNotes
@@ -9,13 +9,13 @@ const {
 
 const { notes } = require('../../db/db');
 
-// router.get('/notes', (req, res) => {
-//     let results = notes;
-//     if (req.query) {
-//         results = filterByQuery(req.query, results);
-//     };
-//     res.json(results);
-//   });
+router.get('/notes', (req, res) => {
+    let results = notes;
+    if (req.query) {
+        results = filterByQuery(req.query, results);
+    };
+    res.json(results);
+  });
 
 router.get('/notes/:id', (req, res) => {
     const result = findById(req.params.id, notes);
@@ -32,7 +32,7 @@ router.post('/notes', (req, res) => {
 
     // if any data in req.body is incorrect, send 400 error back
     if (!validateNotes(req.body)) {
-        res.status(400).send('The note is not properly formatted.');
+        res.status(400).send('The note cannot be empty.');
     } else {
         const note = createNewNote(req.body, notes);
         res.json(notes);

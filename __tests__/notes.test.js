@@ -47,13 +47,13 @@ test("validates notes", () => {
 
     const invalidNote = {
         id: "4",
-        title: "Jordan",
-        text: ""
+        title: 1234,
+        text: "1234"
     };
 
     const result = validateNotes(note);
     const result2 = validateNotes(invalidNote);
 
-    expect(result).toBe(true);
-    expect(result2).toBe(false);
+    expect(result).toBeDefined(true);
+    expect(result2).toBeNull(true);
 });

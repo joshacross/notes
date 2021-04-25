@@ -8,6 +8,16 @@
       "title": "Hello",
       "text": "How are you",
       "id": "1"
+    },
+    {
+      "title": "Hello this is a note",
+      "text": "iasjoij",
+      "id": "2"
+    },
+    {
+      "title": "About Me",
+      "text": "This is a note about me",
+      "id": "3"
     }
   ]
 }
