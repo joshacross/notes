@@ -34,13 +34,19 @@ router.post('/notes', (req, res) => {
 
 });
 
-// router.delete('/notes/:id', (req, res) => {
-//     const noteIndex = findById(req.params.id, notes);
+router.delete('/notes/:id', (req, res) => {
+    const noteId = findById(req.params.id, notes);
 
-//     if (noteIndex === -1) return res.status(404).json({})
+    console.log(noteId.result);
+    if (noteId) {
+        delete noteId.result[1];
+        console.log(noteId.result);
+    } else {
+        res.send(404);
+    };
+    const deletedNote = noteId.result.splice(1,1);
+    console.log(deletedNote);
 
-//     notes.splice(noteIndex, 1)
-//     res.json(notes)
-// });
+});
 
 module.exports = router;
