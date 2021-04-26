@@ -10,9 +10,25 @@
       "id": "1"
     },
     {
+<<<<<<< HEAD
       "title": "Noteworld",
       "text": "Hello World!",
       "id": "2"
+=======
+      "title": "Hello this is a note",
+      "text": "iasjoij",
+      "id": "2"
+    },
+    {
+      "title": "About Me",
+      "text": "This is a note about me",
+      "id": "3"
+    },
+    {
+      "title": "This is a note?",
+      "text": "What?",
+      "id": "4"
+>>>>>>> develop
     }
   ]
 }

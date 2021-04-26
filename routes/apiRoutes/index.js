@@ -1,21 +1,20 @@
 const router = require('express').Router();
 
 const { 
-    // filterByQuery,
+    filterByQuery,
     findById,
-    createNewNote,
-    validateNotes
+    createNewNote
 } = require('../../lib/notes');
 
 const { notes } = require('../../db/db');
 
-// router.get('/notes', (req, res) => {
-//     let results = notes;
-//     if (req.query) {
-//         results = filterByQuery(req.query, results);
-//     };
-//     res.json(results);
-//   });
+router.get('/notes', (req, res) => {
+    let results = notes;
+    if (req.query) {
+        results = filterByQuery(req.query, results);
+    };
+    res.json(results);
+  });
 
 router.get('/notes/:id', (req, res) => {
     const result = findById(req.params.id, notes);
@@ -30,13 +29,24 @@ router.post('/notes', (req, res) => {
     // set id based on what the next index of the array will be
     req.body.id = notes.length.toString();
 
-    // if any data in req.body is incorrect, send 400 error back
-    if (!validateNotes(req.body)) {
-        res.status(400).send('The note is not properly formatted.');
+    const note = createNewNote(req.body, notes);
+    res.json(notes);
+
+});
+
+router.delete('/notes/:id', (req, res) => {
+    const noteId = findById(req.params.id, notes);
+
+    console.log(noteId.result);
+    if (noteId) {
+        delete noteId.result[1];
+        console.log(noteId.result);
     } else {
-        const note = createNewNote(req.body, notes);
-        res.json(notes);
-    }
+        res.send(404);
+    };
+    const deletedNote = noteId.result.splice(1,1);
+    console.log(deletedNote);
+
 });
 
 module.exports = router;
